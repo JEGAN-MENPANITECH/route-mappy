@@ -54,85 +54,9 @@
   },
   "light": {
     "anchor": "map",
-    "position": [
-      "interpolate",
-      [
-        "linear"
-      ],
-      [
-        "zoom"
-      ],
-      0,
-      [
-        "literal",
-        [
-          1.15,
-          45,
-          55
-        ]
-      ],
-      12,
-      [
-        "literal",
-        [
-          1.35,
-          45,
-          45
-        ]
-      ],
-      16,
-      [
-        "literal",
-        [
-          1.5,
-          45,
-          42
-        ]
-      ],
-      20,
-      [
-        "literal",
-        [
-          1.65,
-          45,
-          38
-        ]
-      ]
-    ],
-    "color": [
-      "interpolate",
-      [
-        "linear"
-      ],
-      [
-        "zoom"
-      ],
-      0,
-      "#FFFFFF",
-      12,
-      "#FFF2D7",
-      17,
-      "#FFE3AE",
-      20,
-      "#A9C4FF"
-    ],
-    "intensity": [
-      "interpolate",
-      [
-        "linear"
-      ],
-      [
-        "zoom"
-      ],
-      0,
-      0.25,
-      12,
-      0.32,
-      16,
-      0.42,
-      20,
-      0.5
-    ]
+    "position": [1.35, 45, 45],
+    "color": "#FFFFFF",
+    "intensity": 0.4
   },
   "sky": {
     "sky-color": [

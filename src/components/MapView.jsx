@@ -1,7 +1,6 @@
 import { useRef, useState, useCallback, useEffect, useMemo, forwardRef, useImperativeHandle } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { getDynamicSunProfile } from '../utils/sunProfile';
 import { loadPoiImages } from '../data/pois';
 import {
   normalizeCoordinate,
@@ -16,7 +15,6 @@ const MAX_ZOOM_LEVEL = 21.99;
 const MIN_ZOOM_LEVEL = 1;
 const REGULAR_ANIMATION_DURATION = 1500;
 const CAMERA_PITCH = 0;
-const SUN_REFRESH_INTERVAL_MS = 10 * 60 * 1000;
 const CAMERA_PADDING_HOME = { top: 200, bottom: 100, left: 100, right: 100 };
 
 const MapView = forwardRef(({
@@ -56,18 +54,10 @@ const MapView = forwardRef(({
   const mountedRef = useRef(false);
   const pendingCameraActionRef = useRef(null);
   const [mapReady, setMapReady] = useState(false);
-  const [sunProfile, setSunProfile] = useState(() => getDynamicSunProfile());
 
   useEffect(() => {
     mountedRef.current = true;
     return () => { mountedRef.current = false; };
-  }, []);
-
-  useEffect(() => {
-    const updateSunProfile = () => setSunProfile(getDynamicSunProfile());
-    updateSunProfile();
-    const timer = setInterval(updateSunProfile, SUN_REFRESH_INTERVAL_MS);
-    return () => clearInterval(timer);
   }, []);
 
   useEffect(() => {
@@ -294,12 +284,6 @@ const MapView = forwardRef(({
       }
     },
   }), [runCameraAction]);
-
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !mapReady || !sunProfile) return;
-    map.setLight(sunProfile.light);
-  }, [sunProfile, mapReady]);
 
   return (
     <div className="map-container">
